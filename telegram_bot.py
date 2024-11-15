@@ -13,7 +13,8 @@ BOT_TOKEN= os.getenv("BOT_TOKEN")
 
 
 async def Start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(f'Hello {update.effective_user.first_name}! I am a language model bot. I can help you with your queries. Please type your query and I will try to answer it.')
+    await update.message.reply_text(
+        f'Hello {update.effective_user.first_name}! I a bot. I can help you with your queries. Please type your query and I will try to answer it.')
 
 async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'Hello {update.effective_user.first_name}')
