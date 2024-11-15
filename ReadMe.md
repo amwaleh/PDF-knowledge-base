@@ -33,6 +33,8 @@ AZURE_OPENAI_API_VERSION=2023-12-01
 AZURE_OPENAI_DEPLOYMENT_NAME=mygpt-4
 AZURE_EMBEDDING_MODEL_NAME=text-embedding-ada-002
 
+# Telegram config
+BOT_TOKEN=800***545:A**********mcaoM
 ```
 
 
@@ -62,75 +64,71 @@ Vector databases enable us to store information as embeddings and search for “
 
 In our example we shall be using `ChromaDb`. You can choose any other [vector databases](https://docs.phidata.com/vectordb/introduction) supported by phidata
 
-## Create KnowledgeBase 
-Knowledgebase is a corpus of information that we want to make our LLM aware of, this is specialized information that will make the LLM be context aware and thus improve the LLM response and user experience. This information can be inform of Texts, Pdf, database, Json, Website etc. 
+## Create Knowledge Base
 
-information needs to be converted into a format that the LLM can easily interpret. We will need to chunk the information, then convert the chunks into embedding, before we store the embeddings into a vectordatabase.
+A Knowledge Base is a corpus of information that we want to make our LLM aware of. This specialized information will make the LLM context-aware and thus improve the LLM's response and user experience. This information can be in the form of text, PDFs, databases, JSON, websites, etc.
+
+The information needs to be converted into a format that the LLM can easily interpret. We will need to chunk the information, then convert the chunks into embeddings, before we store the embeddings into a vector database.
 
 ```mermaid
 flowchart LR
-    A[Context Data ] --> B[Chunk Information]
+    A[Context Data] --> B[Chunk Information]
     B --> C[Convert Chunks into Embeddings]
     C --> D[Store Embeddings into Vector Database]
     style A fill:#333,stroke:#333,stroke-width:4px,color:fff;
-    style B fill:#33f,stroke:#333,stroke-width:2px,color:fff;;
-    style C fill:#223,stroke:#333,stroke-width:2px,color:fff;;
-    style D fill:#0A0,stroke:#333,stroke-width:2px,color:fff;;
+    style B fill:#33f,stroke:#333,stroke-width:2px,color:fff;
+    style C fill:#223,stroke:#333,stroke-width:2px,color:fff;
+    style D fill:#0A0,stroke:#333,stroke-width:2px,color:fff;
 ```
 
 
 -------------------------------------------------
 ### Why I Chose Langchain PDF Loader
-Phidata support use of LangChain retriever or vector store as a knowledge base through LangChainKnowledgeBase agent.
-Why I Chose to Go This Route
- - ran into a couple of Sqlachemy issues while trying to save multiple files.
- - Easy functionality for reading files with a directory
 
-You can still use [PDFKnowledgeBase](https://docs.phidata.com/knowledge/pdf). 
+Phidata supports the use of LangChain retriever or vector store as a knowledge base through the LangChainKnowledgeBase agent.
 
-## Loading the Vector store
-You only need to run the KnowledgeBase Load command once or when updating the information. 
-The `load_vector_store ` should only be run once as the embedding will be persisteted in the VectorDB.
+Reasons for this choice:
+- Encountered issues with SQLAlchemy while trying to save multiple files.
+- Easy functionality for reading files from a directory.
 
+You can also use [PDFKnowledgeBase](https://docs.phidata.com/knowledge/pdf).
 
-```python 
-# main.py
+## Loading the Vector Store
+
+You only need to run the Knowledge Base Load command once or when updating the information. The `load_vector_store` command should only be run once as the embeddings will be persisted in the VectorDB.
+
+```python
+# [main.py](http://_vscodecontentref_/1)
 
 def load_vector_store():
-    # Store embeddigs into vectorstore
+    # Store embeddings into vector store
     loader = PyPDFDirectoryLoader(file_path)
     docs = loader.load()
     Chroma.from_documents(
-     .....
-        )
-    
-
-
-
+        .....
+    )
 ```
 # Run the app
-Run the following command only on the first run
+Run the following command only on the first run:
 `python main.py`
 
-on subsequent runs please comment the `load_vector_store()` command in the `main.py` file  to avoid recreating the vectordatabase
+On subsequent runs, please comment out the `load_vector_store()` command in the `main.py` file to avoid recreating the vector database.
 
 # Telegram Bot
-Install telegram for[ desktop](https://desktop.telegram.org/)
+Install Telegram for [desktop](https://desktop.telegram.org/).
 
-Follow this [guide](https://sendpulse.com/knowledge-base/chatbot/telegram/create-telegram-chatbot) to register a bot 
+Follow this [guide](https://sendpulse.com/knowledge-base/chatbot/telegram/create-telegram-chatbot) to register a bot.
 
-- Add the Chatbot Key to your environment variables 
+- Add the Chatbot Key to your environment variables:
 
-```python 
+```python
 AZURE_OPENAI_DEPLOYMENT_NAME=mygpt-4
 AZURE_EMBEDDING_MODEL_NAME=text-embedding-ada-002
 
 # Telegram config
-
 BOT_TOKEN=800***545:A**********mcaoM
-
-
 ```
+
 ## running your Bot
 Run 
 
