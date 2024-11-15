@@ -12,7 +12,7 @@ You can use most of the available models as of October 2023. In this Model we ar
 
 - Deploy an embedding model, I will be deploying `text-embedding-ada-002`. ensure the embedding model is compatible with your chat model.
 
-- [How to deploy mode in Azure](https://learn.microsoft.com/en-us/azure/ai-studio/quickstarts/get-started-playground)
+- [How to deploy model in Azure](https://learn.microsoft.com/en-us/azure/ai-studio/quickstarts/get-started-playground)
 
 # Create your python project
 - Select a vector database that you will use and set it up. We shall  use [Chromadb](https://docs.trychroma.com/getting-started) for this example 
@@ -57,12 +57,12 @@ python-telegram-bot
 
 
 ### Agents
-Phidata uses [agent](https://github.com/phidatahq/phidata) carry out tasks, this agents utilize LLM, various tools, Memory and knowledge base to enhance the A.I experience 
+Phidata uses [agents](https://github.com/phidatahq/phidata) carry out tasks, this agents utilize LLM, various tools, Memory and knowledge base to enhance the A.I experience 
 
 ### Vector Database
 Vector databases enable us to store information as embeddings and search for “results similar” to our input query using cosine similarity or full text search. These results are then provided to the Agent as context so it can respond in a context-aware manner using Retrieval Augmented Generation (RAG).
 
-In our example we shall be using `ChromaDb`. You can choose any other [vector databases](https://docs.phidata.com/vectordb/introduction) supported by phidata
+In our example we shall use `ChromaDb`. You can choose any other [vector databases](https://docs.phidata.com/vectordb/introduction) supported by phidata
 
 ## Create Knowledge Base
 
@@ -95,10 +95,10 @@ You can also use [PDFKnowledgeBase](https://docs.phidata.com/knowledge/pdf).
 
 ## Loading the Vector Store
 
-You only need to run the Knowledge Base Load command once or when updating the information. The `load_vector_store` command should only be run once as the embeddings will be persisted in the VectorDB.
+You only need to run the KnowledgeBase Loader command once or when updating the information. The `load_vector_store` command should only be run once as the embeddings will be persisted in the VectorDB.
 
 ```python
-# [main.py](http://_vscodecontentref_/1)
+# main.py
 
 def load_vector_store():
     # Store embeddings into vector store
@@ -129,12 +129,12 @@ AZURE_EMBEDDING_MODEL_NAME=text-embedding-ada-002
 BOT_TOKEN=800***545:A**********mcaoM
 ```
 
-## running your Bot
+## Running your Bot
 Run 
 
 `python telegram_bot.py`
 
-start charting with your bot
+start chatting with your bot
 
 -----------------------------------
 
