@@ -72,10 +72,10 @@ flowchart LR
     A[Context Data ] --> B[Chunk Information]
     B --> C[Convert Chunks into Embeddings]
     C --> D[Store Embeddings into Vector Database]
-    style A fill:#333,stroke:#333,stroke-width:4px;
-    style B fill:#33f,stroke:#333,stroke-width:2px;
-    style C fill:#223,stroke:#333,stroke-width:2px;
-    style D fill:#0A0,stroke:#333,stroke-width:2px;
+    style A fill:#333,stroke:#333,stroke-width:4px,color:fff;
+    style B fill:#33f,stroke:#333,stroke-width:2px,color:fff;;
+    style C fill:#223,stroke:#333,stroke-width:2px,color:fff;;
+    style D fill:#0A0,stroke:#333,stroke-width:2px,color:fff;;
 ```
 
 
@@ -109,7 +109,7 @@ def load_vector_store():
 
 ```
 # Run the app
-run the following command only on the first run
+Run the following command only on the first run
 `python main.py`
 
 on subsequent runs please comment the `load_vector_store()` command in the `main.py` file  to avoid recreating the vectordatabase
