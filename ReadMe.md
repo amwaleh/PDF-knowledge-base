@@ -1,21 +1,24 @@
+
+![RAG flow](RAG.png "RAG FLOW")
 # Introduction 
 
-This is a simple project that connects to an LLM (AzureOpenAi) and incorporates context-specific information from a PDF. As a result, the Bot can answer questions related to the information in the PDF.
+This is a simple Medical Cover A.I Assistant that Helps you Find information regarding your medical insurance cover. 
 
 
 
-# Set up your Model
-You can use most of the available models as of October 2023. In this Model we are going to use AzureOpenAI for our models.
 
-## Deploy Model on Azure Ai Studio 
-- Deploy a model for chat completion, in this instance we will be using `gpt-4` as this is one of the latest offerings. Choose one that suits you
+# Set up your LLM Model
+You can use most of the available LLM models as of October 2023. In this app  we are used AzureOpenAI for our LLM models.
 
-- Deploy an embedding model, I will be deploying `text-embedding-ada-002`. ensure the embedding model is compatible with your chat model.
+## Deploy LLM Model on Azure Ai Studio 
+- Deploy a model for chat completion, in this instance we used `gpt-4` as this is one of the latest offerings at the time. Choose one that suits you
+
+- Deploy an embedding model, I  deployed `text-embedding-ada-002`. ensure the embedding model is compatible with your chat completion LLM model.
 
 - [How to deploy model in Azure](https://learn.microsoft.com/en-us/azure/ai-studio/quickstarts/get-started-playground)
 
 # Create your python project
-- Select a vector database that you will use and set it up. We shall  use [Chromadb](https://docs.trychroma.com/getting-started) for this example 
+- Select a vector database that you will use and set it up. I used [Chromadb](https://docs.trychroma.com/getting-started) for this example 
 - If you choose to use Postgres as a vector database you will need to install the vector extension. [check installation instructions here](#postgress-pgvector-extension-installation)
 - Setup your virtual environment 
 
@@ -80,6 +83,9 @@ flowchart LR
     style C fill:#223,stroke:#333,stroke-width:2px,color:fff;
     style D fill:#0A0,stroke:#333,stroke-width:2px,color:fff;
 ```
+### Addidng your own Data
+You can add your own data - (pdf files) by deleting the existing files in the `./knowledgebase` folder.
+Then run the `load_vector_store`  command 
 
 
 -------------------------------------------------
@@ -147,7 +153,7 @@ start chatting with your bot
 
 Please check the github page for instruction
 - ensure you have latest posgresQL installed that supports Vector extension 
-- for windows you will need to have Visual studio installed for you to build the extension
+- for windows, you will need  Visual studio installed for you to build the extension
 - check the `nmake` executable in visual studio folder 
 - Running your console as Administrator, run the make command by referencing the whole path to the nmake file e.g
 
