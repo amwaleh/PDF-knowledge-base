@@ -2,7 +2,8 @@ import os
 from phi.model.azure import AzureOpenAIChat
 from rich.console import Console
 
-
+from dotenv import load_dotenv
+load_dotenv()
 OPENAI_API_VERSION = os.getenv("OPENAI_API_VERSION")
 DEPLOYMENT_NAME = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
 AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")

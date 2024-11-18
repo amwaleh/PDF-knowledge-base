@@ -1,7 +1,8 @@
 from phi.agent import Agent
 from phi.knowledge.langchain import LangChainKnowledgeBase
 from phi.storage.agent.sqlite import SqlAgentStorage
-
+import json
+import httpx
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_openai import AzureOpenAIEmbeddings
 from langchain_chroma import Chroma
@@ -19,6 +20,22 @@ instructions = [
     "Add the date when the policy was created when cautioning the user on the relevance of the information.",
     "For the SSN list or provider look up, do a thorough search on these fields: Name, Type, Address, City, Contact Information."
 ]
+
+
+def function_get_Bupa_provider(country_code:str = "KE"):
+    """
+     Get Bupa providers by country code
+     args:
+        country_code (str): Alpha-2 code of the country e.g AO = Angola, KE = Kenya, UG = Uganda
+    return: json response of the Bupa providers
+    Save the output in the knowledge base
+     """
+    url = f"https://www.bupaglobal.com/FacilitiesFinder/GetFacilityByCountry/{country_code}"
+
+    response = httpx.get(url)
+    result = response.json()
+    print(result)
+    return json.dumps(result)
 
 def load_vector_store():
     # Store embeddings into vector store
@@ -47,8 +64,8 @@ def get_bupa_knowledge(query):
     )
     
     agent = Agent(
+        tools=[function_get_Bupa_provider],
         knowledge_base=knowledge_base, 
-        add_references_to_prompt=True, 
         model=azure_model,
         storage=SqlAgentStorage(table_name="Bupa_agent", db_file="agents.db"),
         add_history_to_messages=True,
